@@ -15,17 +15,15 @@ namespace Bramble.Core.Tests
         #region Constructor
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_NameValueBase_ThrowsOnNullName()
         {
-            PropertyBag dummy = new PropertyBag(null, "bar", new PropertyBag[] { new PropertyBag("base") });
+            Assert.That(() => new PropertyBag(null, "bar", new PropertyBag[] { new PropertyBag("base") }), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_NameValueBase_ThrowsOnNullValue()
         {
-            PropertyBag dummy = new PropertyBag("foo", null, new PropertyBag[] { new PropertyBag("base") });
+            Assert.That(() => new PropertyBag("foo", null, new PropertyBag[] { new PropertyBag("base") }), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
@@ -45,17 +43,15 @@ namespace Bramble.Core.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_NameValue_ThrowsOnNullName()
         {
-            PropertyBag dummy = new PropertyBag(null, "bar");
+            Assert.That(() => new PropertyBag(null, "bar"), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_NameValue_ThrowsOnNullValue()
         {
-            PropertyBag dummy = new PropertyBag("foo", (string)null);
+            Assert.That(() => new PropertyBag("foo", (string)null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
@@ -68,10 +64,9 @@ namespace Bramble.Core.Tests
             Assert.AreEqual(0, prop.Count);
         }
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_NameBase_ThrowsOnNullName()
         {
-            PropertyBag dummy = new PropertyBag(null, new PropertyBag[] { new PropertyBag("base") });
+            Assert.That(() => new PropertyBag(null, new PropertyBag[] { new PropertyBag("base") }), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
@@ -97,10 +92,9 @@ namespace Bramble.Core.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_Name_ThrowsOnNull()
         {
-            PropertyBag dummy = new PropertyBag(null);
+            Assert.That(() => new PropertyBag(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]

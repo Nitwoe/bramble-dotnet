@@ -23,17 +23,15 @@ namespace Bramble.Core.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestClampThrowsIfMinGreaterThanMax()
         {
-            int dummy = (0).Clamp(3, 1);
+            Assert.That(() => (0).Clamp(3, 1), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestRemapIntThrowsIfNoRange()
         {
-            int dummy = (5).Remap(4, 4, 4, 7);
+            Assert.That(() => (5).Remap(4, 4, 4, 7), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
 
         [Test]

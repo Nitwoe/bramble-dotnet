@@ -37,17 +37,15 @@ namespace Bramble.Core.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestConstructor_NegativeWidthThrows()
         {
-            new Array2D<int>(-1, 4);
+            Assert.That(() => new Array2D<int>(-1, 4), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestConstructor_NegativeHeightThrows()
         {
-            new Array2D<int>(4, -1);
+            Assert.That(() => new Array2D<int>(4, -1), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
 
         [Test]

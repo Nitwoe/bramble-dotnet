@@ -13,10 +13,9 @@ namespace Bramble.Core.Tests
     public class IndentationTreeFixture
     {
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Parse_ThrowsOnNull()
         {
-            IndentationTree dummy = IndentationTree.Parse(null);
+            Assert.That(() => IndentationTree.Parse(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]

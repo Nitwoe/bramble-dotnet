@@ -12,10 +12,9 @@ namespace Bramble.Core.Tests
     public class SingleExtensionsFixture
     {
         [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestNormalizeThrowsIfNoRange()
         {
-            float dummy = (5.0f).Normalize(4.0f, 4.0f);
+            Assert.That(() => (5.0f).Normalize(4.0f, 4.0f), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
 
         [Test]
@@ -29,10 +28,9 @@ namespace Bramble.Core.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestRemapFloatThrowsIfNoRange()
         {
-            float dummy = (5).Remap(4, 4, 4, 7);
+            Assert.That(() => (5).Remap(4, 4, 4, 7), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
 
         [Test]

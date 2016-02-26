@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual C# Express 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bramble.Core", "Bramble.Core\Bramble.Core.csproj", "{39CE9B6D-4223-4D03-A4DA-9F96417CAF24}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bramble.Core.Tests", "Bramble.Core.Tests\Bramble.Core.Tests.csproj", "{0BF442A6-C774-4A91-86FE-A37313A5FED2}"

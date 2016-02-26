@@ -12,7 +12,7 @@ namespace Bramble.Core.Tests
     [TestFixture]
     public class PropertyBagParserFixture
     {
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void SetUpFixture()
         {
             // make a temp dir
@@ -38,7 +38,7 @@ namespace Bramble.Core.Tests
             File.WriteAllLines(Path.Combine(subDir, "b.txt"), new string[] { "b" });
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void TearDownFixture()
         {
             // clean up
@@ -48,10 +48,9 @@ namespace Bramble.Core.Tests
         #region StripEmptyLines
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void StripEmptyLines_ThrowsOnNull()
         {
-            IEnumerable<string> dummy = PropertyBagParser.StripEmptyLines(null);
+            Assert.That(() => PropertyBagParser.StripEmptyLines(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
@@ -94,10 +93,9 @@ namespace Bramble.Core.Tests
         #region StripComments
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void StripComments_ThrowsOnNull()
         {
-            IEnumerable<string> dummy = PropertyBagParser.StripComments(null);
+            Assert.That(() => PropertyBagParser.StripComments(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
@@ -145,23 +143,21 @@ namespace Bramble.Core.Tests
         #region ParseIncludes
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ParseIncludes_ThrowsOnNullBasePath()
         {
             IEnumerable<string> dummy = PropertyBagParser.ParseIncludes(null, new string[0]);
 
             // needed to make sure dummy is evaluated
-            int count = dummy.Count();
+            Assert.That(() => dummy.Count(), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ParseIncludes_ThrowsOnNullLines()
         {
             IEnumerable<string> dummy = PropertyBagParser.ParseIncludes(String.Empty, null);
 
             // needed to make sure dummy is evaluated
-            int count = dummy.Count();
+            Assert.That(() => dummy.Count(), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
@@ -212,10 +208,9 @@ namespace Bramble.Core.Tests
         #region Parse
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Parse_ThrowsOnNull()
         {
-            PropertyBag prop = PropertyBagParser.Parse(null);
+            Assert.That(() => PropertyBagParser.Parse(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]

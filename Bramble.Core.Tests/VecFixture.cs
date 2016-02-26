@@ -132,10 +132,9 @@ namespace Bramble.Core.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(DivideByZeroException))]
         public void TestOperatorVecDividedByZeroThrows()
         {
-            Vec dummy = new Vec(1, 3) / 0;
+            Assert.That(() => new Vec(1, 3) / 0, Throws.TypeOf<DivideByZeroException>());
         }
 
         #endregion
@@ -362,11 +361,10 @@ namespace Bramble.Core.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void TestEachFuncIsNotNull()
         {
             Vec start = new Vec(2, 3);
-            Vec result = start.Each(null);
+            Assert.That(() => start.Each(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         #endregion

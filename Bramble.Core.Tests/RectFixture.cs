@@ -165,17 +165,15 @@ namespace Bramble.Core.Tests
         #region Enumeration
 
         [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestEnumerateNegativeWidth()
         {
-            TestEnumeration(new Rect(3, 2, -1, 1));
+            Assert.That(() => TestEnumeration(new Rect(3, 2, -1, 1)), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestEnumerateNegativeHeight()
         {
-            TestEnumeration(new Rect(3, 2, 1, -1));
+            Assert.That(() => TestEnumeration(new Rect(3, 2, 1, -1)), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
 
         [Test]
