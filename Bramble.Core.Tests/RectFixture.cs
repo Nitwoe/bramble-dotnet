@@ -49,7 +49,7 @@ namespace Bramble.Core.Tests
         [Test]
         public void TestRowVecPos()
         {
-            Rect r = Rect.Row(new Vec(-2, 3), 4);
+            Rect r = Rect.Row(new Vector2D(-2, 3), 4);
 
             Assert.AreEqual(-2, r.Position.X);
             Assert.AreEqual(3, r.Position.Y);
@@ -82,7 +82,7 @@ namespace Bramble.Core.Tests
         [Test]
         public void TestColumnVecPos()
         {
-            Rect r = Rect.Column(new Vec(-2, 3), 4);
+            Rect r = Rect.Column(new Vector2D(-2, 3), 4);
 
             Assert.AreEqual(-2, r.Position.X);
             Assert.AreEqual(3, r.Position.Y);
@@ -108,7 +108,7 @@ namespace Bramble.Core.Tests
         [Test]
         public void TestConstructorSizeVec()
         {
-            Rect r = new Rect(new Vec(3, 5));
+            Rect r = new Rect(new Vector2D(3, 5));
 
             Assert.AreEqual(0, r.Position.X);
             Assert.AreEqual(0, r.Position.Y);
@@ -119,7 +119,7 @@ namespace Bramble.Core.Tests
         [Test]
         public void TestConstructorPositionVecSizeVec()
         {
-            Rect r = new Rect(new Vec(2, 4), new Vec(3, 5));
+            Rect r = new Rect(new Vector2D(2, 4), new Vector2D(3, 5));
 
             Assert.AreEqual(2, r.Position.X);
             Assert.AreEqual(4, r.Position.Y);
@@ -141,7 +141,7 @@ namespace Bramble.Core.Tests
         [Test]
         public void TestConstructorPositionVecSizeInt()
         {
-            Rect r = new Rect(new Vec(2, 4), 3, 5);
+            Rect r = new Rect(new Vector2D(2, 4), 3, 5);
 
             Assert.AreEqual(2, r.Position.X);
             Assert.AreEqual(4, r.Position.Y);
@@ -152,7 +152,7 @@ namespace Bramble.Core.Tests
         [Test]
         public void TestConstructorPositionIntSizeVec()
         {
-            Rect r = new Rect(2, 4, new Vec(3, 5));
+            Rect r = new Rect(2, 4, new Vector2D(3, 5));
 
             Assert.AreEqual(2, r.Position.X);
             Assert.AreEqual(4, r.Position.Y);
@@ -198,30 +198,30 @@ namespace Bramble.Core.Tests
         public void TestEnumerateRow()
         {
             TestEnumeration(Rect.Row(4, 5, 3),
-                new Vec(4, 5),
-                new Vec(5, 5),
-                new Vec(6, 5));
+                new Vector2D(4, 5),
+                new Vector2D(5, 5),
+                new Vector2D(6, 5));
         }
 
         [Test]
         public void TestEnumerateColumn()
         {
             TestEnumeration(Rect.Column(4, 5, 3),
-                new Vec(4, 5),
-                new Vec(4, 6),
-                new Vec(4, 7));
+                new Vector2D(4, 5),
+                new Vector2D(4, 6),
+                new Vector2D(4, 7));
         }
 
         [Test]
         public void TestEnumerate()
         {
             TestEnumeration(new Rect(4, 5, 3, 2),
-                new Vec(4, 5),
-                new Vec(5, 5),
-                new Vec(6, 5),
-                new Vec(4, 6),
-                new Vec(5, 6),
-                new Vec(6, 6));
+                new Vector2D(4, 5),
+                new Vector2D(5, 5),
+                new Vector2D(6, 5),
+                new Vector2D(4, 6),
+                new Vector2D(5, 6),
+                new Vector2D(6, 6));
         }
 
         [Test]
@@ -234,30 +234,30 @@ namespace Bramble.Core.Tests
 
             // a single unit
             TestEnumeration(new Rect(4, 5, 1, 1).Trace(),
-                new Vec(4, 5));
+                new Vector2D(4, 5));
 
             // a row
             TestEnumeration(new Rect(4, 5, 3, 1).Trace(),
-                new Vec(4, 5),
-                new Vec(5, 5),
-                new Vec(6, 5));
+                new Vector2D(4, 5),
+                new Vector2D(5, 5),
+                new Vector2D(6, 5));
 
             // a column
             TestEnumeration(new Rect(4, 5, 1, 3).Trace(),
-                new Vec(4, 5),
-                new Vec(4, 6),
-                new Vec(4, 7));
+                new Vector2D(4, 5),
+                new Vector2D(4, 6),
+                new Vector2D(4, 7));
 
             // a 3x3 square
             TestEnumeration(new Rect(4, 5, 3, 3).Trace(),
-                new Vec(4, 5),
-                new Vec(5, 5),
-                new Vec(6, 5),
-                new Vec(6, 6),
-                new Vec(6, 7),
-                new Vec(5, 7),
-                new Vec(4, 7),
-                new Vec(4, 6));
+                new Vector2D(4, 5),
+                new Vector2D(5, 5),
+                new Vector2D(6, 5),
+                new Vector2D(6, 6),
+                new Vector2D(6, 7),
+                new Vector2D(5, 7),
+                new Vector2D(4, 7),
+                new Vector2D(4, 6));
         }
 
         #endregion
@@ -317,23 +317,23 @@ namespace Bramble.Core.Tests
             Assert.AreEqual(2 + 4, rect.Bottom);
 
             // ltrb vecs
-            Assert.AreEqual(new Vec(1, 2), rect.TopLeft);
-            Assert.AreEqual(new Vec(1 + 3, 2), rect.TopRight);
-            Assert.AreEqual(new Vec(1, 2 + 4), rect.BottomLeft);
-            Assert.AreEqual(new Vec(1 + 3, 2 + 4), rect.BottomRight);
+            Assert.AreEqual(new Vector2D(1, 2), rect.TopLeft);
+            Assert.AreEqual(new Vector2D(1 + 3, 2), rect.TopRight);
+            Assert.AreEqual(new Vector2D(1, 2 + 4), rect.BottomLeft);
+            Assert.AreEqual(new Vector2D(1 + 3, 2 + 4), rect.BottomRight);
         }
 
-        private void TestEnumeration(IEnumerable<Vec> enumerable, params Vec[] expected)
+        private void TestEnumeration(IEnumerable<Vector2D> enumerable, params Vector2D[] expected)
         {
             // build the queue of expected vectors
-            Queue<Vec> queue = new Queue<Vec>();
-            foreach (Vec pos in expected)
+            Queue<Vector2D> queue = new Queue<Vector2D>();
+            foreach (Vector2D pos in expected)
             {
                 queue.Enqueue(pos);
             }
 
             // enumerate and compare
-            foreach (Vec pos in enumerable)
+            foreach (Vector2D pos in enumerable)
             {
                 Assert.AreEqual(queue.Dequeue(), pos);
             }

@@ -387,7 +387,7 @@ namespace Bramble.Core.Tests
             get
             {
                 string tempDir = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache);
-                return Path.Combine(tempDir, "Amaranth.Util.Tests");
+                return Path.Combine(tempDir, "Bramble.Core.Tests");
             }
         }
 

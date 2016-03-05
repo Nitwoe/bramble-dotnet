@@ -28,7 +28,7 @@ namespace Bramble.Core
         /// Initializes a new instance of Array2D with the given size.
         /// </summary>
         /// <param name="size">Size of the array.</param>
-        public Array2D(Vec size)
+        public Array2D(Vector2D size)
             : this(size.X, size.Y)
         {
         }
@@ -36,7 +36,7 @@ namespace Bramble.Core
         /// <summary>
         /// Gets the size of the array.
         /// </summary>
-        public Vec Size { get { return new Vec(Width, Height); } }
+        public Vector2D Size { get { return new Vector2D(Width, Height); } }
 
         /// <summary>
         /// Gets the bounds of the array. The top-level coordinate will be the origin.
@@ -58,7 +58,7 @@ namespace Bramble.Core
         /// </summary>
         /// <param name="pos">The position of the element. Must be within bounds.</param>
         /// <exception cref="IndexOutOfBoundsException">if the position is out of bounds.</exception>
-        public T this[Vec pos]
+        public T this[Vector2D pos]
         {
             get { return this[pos.X, pos.Y]; }
             set { this[pos.X, pos.Y] = value; }
@@ -82,7 +82,7 @@ namespace Bramble.Core
         /// <param name="value">The value to fill the array with.</param>
         public void Fill(T value)
         {
-            foreach (Vec pos in new Rect(Size))
+            foreach (Vector2D pos in new Rect(Size))
             {
                 this[pos] = value;
             }
@@ -92,15 +92,15 @@ namespace Bramble.Core
         /// Fills all of the elements in the array with values returned by the given callback.
         /// </summary>
         /// <param name="callback">The function to call for each element in the array.</param>
-        public void Fill(Func<Vec, T> callback)
+        public void Fill(Func<Vector2D, T> callback)
         {
-            foreach (Vec pos in new Rect(Size))
+            foreach (Vector2D pos in new Rect(Size))
             {
                 this[pos] = callback(pos);
             }
         }
 
-        private void CheckBounds(Vec pos)
+        private void CheckBounds(Vector2D pos)
         {
             if (pos.X < 0) throw new ArgumentOutOfRangeException("pos.X");
             if (pos.X >= Width) throw new ArgumentOutOfRangeException("pos.X");

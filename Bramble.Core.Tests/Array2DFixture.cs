@@ -18,14 +18,14 @@ namespace Bramble.Core.Tests
         public void TestConstructor_WithWidthHeight()
         {
             var array = new Array2D<int>(2, 3);
-            Assert.AreEqual(new Vec(2, 3), array.Size);
+            Assert.AreEqual(new Vector2D(2, 3), array.Size);
         }
 
         [Test]
         public void TestConstructor_WithSize()
         {
-            var array = new Array2D<int>(new Vec(2, 3));
-            Assert.AreEqual(new Vec(2, 3), array.Size);
+            var array = new Array2D<int>(new Vector2D(2, 3));
+            Assert.AreEqual(new Vector2D(2, 3), array.Size);
         }
 
         [Test]
@@ -70,7 +70,7 @@ namespace Bramble.Core.Tests
         public void TestSize()
         {
             var array = new Array2D<string>(3, 4);
-            Assert.AreEqual(new Vec(3, 4), array.Size);
+            Assert.AreEqual(new Vector2D(3, 4), array.Size);
         }
 
         [Test]

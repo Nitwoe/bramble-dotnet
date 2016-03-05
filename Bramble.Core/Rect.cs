@@ -9,7 +9,7 @@ namespace Bramble.Core
     /// and much more feature-rich.
     /// </summary>
     [Serializable]
-    public struct Rect : IEquatable<Rect>, IEnumerable<Vec>
+    public struct Rect : IEquatable<Rect>, IEnumerable<Vector2D>
     {
         /// <summary>
         /// Gets the empty rectangle.
@@ -45,7 +45,7 @@ namespace Bramble.Core
         /// </summary>
         /// <param name="pos">The top-left corner of the rectangle.</param>
         /// <returns>The new rectangle.</returns>
-        public static Rect Row(Vec pos, int size)
+        public static Rect Row(Vector2D pos, int size)
         {
             return new Rect(pos.X, pos.Y, size, 1);
         }
@@ -80,7 +80,7 @@ namespace Bramble.Core
         /// <param name="pos">The top-left corner of the rectangle.</param>
         /// <param name="size">The height of the rectangle.</param>
         /// <returns>The new rectangle.</returns>
-        public static Rect Column(Vec pos, int size)
+        public static Rect Column(Vector2D pos, int size)
         {
             return new Rect(pos.X, pos.Y, 1, size);
         }
@@ -116,7 +116,7 @@ namespace Bramble.Core
 
         public static Rect CenterIn(Rect toCenter, Rect main)
         {
-            Vec pos = main.Position + ((main.Size - toCenter.Size) / 2);
+            Vector2D pos = main.Position + ((main.Size - toCenter.Size) / 2);
 
             return new Rect(pos, toCenter.Size);
         }
@@ -133,25 +133,25 @@ namespace Bramble.Core
             return !r1.Equals(r2);
         }
 
-        public static Rect operator +(Rect r1, Vec v2)
+        public static Rect operator +(Rect r1, Vector2D v2)
         {
             return new Rect(r1.Position + v2, r1.Size);
         }
 
-        public static Rect operator +(Vec v1, Rect r2)
+        public static Rect operator +(Vector2D v1, Rect r2)
         {
             return new Rect(r2.Position + v1, r2.Size);
         }
 
-        public static Rect operator -(Rect r1, Vec v2)
+        public static Rect operator -(Rect r1, Vector2D v2)
         {
             return new Rect(r1.Position - v2, r1.Size);
         }
 
         #endregion
 
-        public Vec Position { get { return mPos; } }
-        public Vec Size { get { return mSize; } }
+        public Vector2D Position { get { return mPos; } }
+        public Vector2D Size { get { return mSize; } }
 
         public int X { get { return mPos.X; } }
         public int Y { get { return mPos.Y; } }
@@ -163,43 +163,43 @@ namespace Bramble.Core
         public int Right { get { return X + Width; } }
         public int Bottom { get { return Y + Height; } }
 
-        public Vec TopLeft { get { return new Vec(Left, Top); } }
-        public Vec TopRight { get { return new Vec(Right, Top); } }
-        public Vec BottomLeft { get { return new Vec(Left, Bottom); } }
-        public Vec BottomRight { get { return new Vec(Right, Bottom); } }
+        public Vector2D TopLeft { get { return new Vector2D(Left, Top); } }
+        public Vector2D TopRight { get { return new Vector2D(Right, Top); } }
+        public Vector2D BottomLeft { get { return new Vector2D(Left, Bottom); } }
+        public Vector2D BottomRight { get { return new Vector2D(Right, Bottom); } }
 
-        public Vec Center { get { return new Vec((Left + Right) / 2, (Top + Bottom) / 2); } }
+        public Vector2D Center { get { return new Vector2D((Left + Right) / 2, (Top + Bottom) / 2); } }
 
         public int Area { get { return mSize.Area; } }
 
-        public Rect(Vec pos, Vec size)
+        public Rect(Vector2D pos, Vector2D size)
         {
             mPos = pos;
             mSize = size;
         }
 
-        public Rect(Vec size)
-            : this(Vec.Zero, size)
+        public Rect(Vector2D size)
+            : this(Vector2D.Zero, size)
         {
         }
 
         public Rect(int x, int y, int width, int height)
-            : this(new Vec(x, y), new Vec(width, height))
+            : this(new Vector2D(x, y), new Vector2D(width, height))
         {
         }
 
-        public Rect(Vec pos, int width, int height)
-            : this(pos, new Vec(width, height))
+        public Rect(Vector2D pos, int width, int height)
+            : this(pos, new Vector2D(width, height))
         {
         }
 
         public Rect(int width, int height)
-            : this(new Vec(width, height))
+            : this(new Vector2D(width, height))
         {
         }
 
-        public Rect(int x, int y, Vec size)
-            : this(new Vec(x, y), size)
+        public Rect(int x, int y, Vector2D size)
+            : this(new Vector2D(x, y), size)
         {
         }
 
@@ -220,14 +220,14 @@ namespace Bramble.Core
             return mPos.GetHashCode() + mSize.GetHashCode();
         }
         
-        public Rect Offset(Vec pos, Vec size)
+        public Rect Offset(Vector2D pos, Vector2D size)
         {
             return new Rect(mPos + pos, mSize + size);
         }
 
         public Rect Offset(int x, int y, int width, int height)
         {
-            return Offset(new Vec(x, y), new Vec(width, height));
+            return Offset(new Vector2D(x, y), new Vector2D(width, height));
         }
 
         public Rect Inflate(int distance)
@@ -235,7 +235,7 @@ namespace Bramble.Core
             return new Rect(mPos.Offset(-distance, -distance), mSize.Offset(distance * 2, distance * 2));
         }
 
-        public bool Contains(Vec pos)
+        public bool Contains(Vector2D pos)
         {
             if (pos.X < mPos.X) return false;
             if (pos.X >= mPos.X + mSize.X) return false;
@@ -278,25 +278,25 @@ namespace Bramble.Core
             return CenterIn(this, rect);
         }
 
-        public IEnumerable<Vec> Trace()
+        public IEnumerable<Vector2D> Trace()
         {
             if ((Width > 1) && (Height > 1))
             {
                 // trace all four sides
-                foreach (Vec top in Row(TopLeft, Width - 1)) yield return top;
-                foreach (Vec right in Column(TopRight.OffsetX(-1), Height - 1)) yield return right;
-                foreach (Vec bottom in Row(Width - 1)) yield return BottomRight.Offset(-1, -1) - bottom;
-                foreach (Vec left in Column(Height - 1)) yield return BottomLeft.OffsetY(-1) - left;
+                foreach (Vector2D top in Row(TopLeft, Width - 1)) yield return top;
+                foreach (Vector2D right in Column(TopRight.OffsetX(-1), Height - 1)) yield return right;
+                foreach (Vector2D bottom in Row(Width - 1)) yield return BottomRight.Offset(-1, -1) - bottom;
+                foreach (Vector2D left in Column(Height - 1)) yield return BottomLeft.OffsetY(-1) - left;
             }
             else if ((Width > 1) && (Height == 1))
             {
                 // a single row
-                foreach (Vec pos in Row(TopLeft, Width)) yield return pos;
+                foreach (Vector2D pos in Row(TopLeft, Width)) yield return pos;
             }
             else if ((Height >= 1) && (Width == 1))
             {
                 // a single column, or one unit
-                foreach (Vec pos in Column(TopLeft, Height)) yield return pos;
+                foreach (Vector2D pos in Column(TopLeft, Height)) yield return pos;
             }
 
             // otherwise, the rect doesn't have a positive size, so there's nothing to trace
@@ -313,7 +313,7 @@ namespace Bramble.Core
 
         #region IEnumerable<Vec> Members
 
-        public IEnumerator<Vec> GetEnumerator()
+        public IEnumerator<Vector2D> GetEnumerator()
         {
             if (mSize.X < 0) throw new ArgumentOutOfRangeException("Cannot enumerate a Rectangle with a negative width.");
             if (mSize.Y < 0) throw new ArgumentOutOfRangeException("Cannot enumerate a Rectangle with a negative height.");
@@ -322,7 +322,7 @@ namespace Bramble.Core
             {
                 for (int x = mPos.X; x < mPos.X + mSize.X; x++)
                 {
-                    yield return new Vec(x, y);
+                    yield return new Vector2D(x, y);
                 }
             }
         }
@@ -338,7 +338,7 @@ namespace Bramble.Core
 
         #endregion
 
-        private Vec mPos;
-        private Vec mSize;
+        private Vector2D mPos;
+        private Vector2D mSize;
     }
 }
